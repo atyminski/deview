@@ -3,7 +3,7 @@ using System.IO;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
-namespace Gevlee.Deview.Core.Watcher
+namespace Gevlee.Deview.Core.Log.File
 {
     public class FileWatcher : IDisposable
     {

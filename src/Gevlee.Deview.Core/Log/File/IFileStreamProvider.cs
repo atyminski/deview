@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Gevlee.Deview.Core.Watcher.File
+namespace Gevlee.Deview.Core.Log.File
 {
     public interface IReadOnlyFileStreamProvider
     {

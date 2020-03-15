@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Gevlee.Deview.Core.Watcher.File
+namespace Gevlee.Deview.Core.Log.File
 {
     public class FileLogReader
     {

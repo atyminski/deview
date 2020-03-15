@@ -1,4 +1,4 @@
-﻿namespace Gevlee.Deview.Core.Watcher
+﻿namespace Gevlee.Deview.Core.Log
 {
     public enum LogStateChangeType
     {

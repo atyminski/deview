@@ -1,4 +1,5 @@
-﻿using Gevlee.Deview.Core.Watcher;
+﻿using Gevlee.Deview.Core.Log;
+using Gevlee.Deview.Core.Log.File;
 using System;
 using System.IO;
 using System.Reactive.Linq;
@@ -56,7 +57,7 @@ namespace Gevlee.Deview.Core.Tests.Watcher
             await watcher.StartAsync();
 
             File.Delete(TestFilePath);
-            
+
             while (!deleteOccured) { }
 
             Assert.True(deleteOccured);

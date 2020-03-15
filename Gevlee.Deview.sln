@@ -11,7 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA1DA107-F9C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9F571DC-AEFB-4212-8680-CB99F68DC422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gevlee.Deview.Core.Tests", "tests\Gevlee.Deview.Core.Tests\Gevlee.Deview.Core.Tests.csproj", "{CD447011-B320-4E88-BC65-23E39ED0B767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gevlee.Deview.Core.Tests", "tests\Gevlee.Deview.Core.Tests\Gevlee.Deview.Core.Tests.csproj", "{CD447011-B320-4E88-BC65-23E39ED0B767}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{774DFBB5-AC4F-4025-B8CE-1EFE24F0EE74}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

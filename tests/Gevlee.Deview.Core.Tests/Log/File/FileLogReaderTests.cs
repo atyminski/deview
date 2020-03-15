@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using Gevlee.Deview.Core.Watcher.File;
+using Gevlee.Deview.Core.Log.File;
 using Moq;
 using System.IO;
 using System.Linq;
