@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Gevlee.Deview.Core.Log.File;
 using Moq;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;

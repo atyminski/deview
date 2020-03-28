@@ -1,11 +1,11 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using AvalonStudio.Shell.Controls;
+using Avalonia.ReactiveUI;
+using Gevlee.Deview.Application.ViewModels;
 
-namespace Gevlee.Deview.Desktop.Views
+namespace Gevlee.Deview.Application.Views
 {
-    public class MainWindow : MetroWindow
+    public class MainWindow : ReactiveWindow<MainWindowViewModel>, IShell
     {
         public MainWindow()
         {
