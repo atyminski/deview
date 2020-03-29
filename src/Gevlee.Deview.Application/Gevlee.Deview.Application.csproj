@@ -16,10 +16,14 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Views\LogView.xaml" />
     <AvaloniaResource Remove="Views\MainMenuView.xaml" />
+    <AvaloniaResource Remove="Views\OpenedLogsContainerView.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Views\LogView.xaml" />
     <None Remove="Views\MainMenuView.xaml" />
+    <None Remove="Views\OpenedLogsContainerView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.6" />
@@ -32,6 +36,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\OpenedLogsContainerView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
