@@ -1,10 +1,11 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Gevlee.Deview.Application.ViewModels;
+using ReactiveUI;
 
 namespace Gevlee.Deview.Application.Views
 {
-    public class LogView : UserControl
+    public class LogView : ReactiveUserControl<LogViewModel>
     {
         public LogView()
         {
@@ -13,6 +14,7 @@ namespace Gevlee.Deview.Application.Views
 
         private void InitializeComponent()
         {
+            this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
         }
     }

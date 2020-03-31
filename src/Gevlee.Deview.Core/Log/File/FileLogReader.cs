@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gevlee.Deview.Core.Log.File
 {
-    public class FileLogReader
+    public class FileLogReader : IFileLogReader
     {
         private readonly IReadOnlyFileStreamProvider _fileStreamProvider;
 
