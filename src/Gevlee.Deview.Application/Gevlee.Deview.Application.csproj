@@ -1,55 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>Gevlee.Deview.Application</AssemblyName>
-    <ApplicationIcon>Assets\avalonia-logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <AvaloniaResource Include="**\*.xaml">
-      <SubType>Designer</SubType>
-    </AvaloniaResource>
-    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Remove="Models\**" />
+    <AvaloniaResource Remove="Views\**" />
+    <Compile Remove="Models\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Models\**" />
+    <None Remove="Views\**" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Remove="Views\LogView.xaml" />
-    <AvaloniaResource Remove="Views\MainMenuView.xaml" />
-    <AvaloniaResource Remove="Views\OpenedLogsContainerView.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Views\LogView.xaml" />
-    <None Remove="Views\MainMenuView.xaml" />
-    <None Remove="Views\OpenedLogsContainerView.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.6" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.6" />
+    <PackageReference Include="Avalonia" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.9" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.9" />
+    <PackageReference Include="ReactiveUI" Version="11.3.8" />
     <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-    <PackageReference Include="Splat.Autofac" Version="9.3.11" />
-    <PackageReference Include="Splat.Serilog" Version="9.3.11" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\MainMenuView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\LogView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\OpenedLogsContainerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
+    <PackageReference Include="Splat.Autofac" Version="9.4.5" />
+    <PackageReference Include="Splat.Serilog" Version="9.4.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gevlee.Deview.Core\Gevlee.Deview.Core.csproj" />
+    <ProjectReference Include="..\Gevlee.Deview.UI\Gevlee.Deview.UI.csproj" />
   </ItemGroup>
 </Project>

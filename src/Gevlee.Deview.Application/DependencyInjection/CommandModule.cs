@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using Gevlee.Deview.Application.Commands;
+using Gevlee.Deview.Core.Commands;
+using Gevlee.Deview.UI.Commands;
 
 namespace Gevlee.Deview.Application.DependencyInjection
 {

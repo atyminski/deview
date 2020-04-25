@@ -2,18 +2,17 @@
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Avalonia.ReactiveUI;
+using Gevlee.Deview.UI;
 using Serilog;
 using Splat;
 using Splat.Autofac;
 using Splat.Serilog;
+using System.Runtime.InteropServices;
 
 namespace Gevlee.Deview.Application
 {
     class Program
     {
-        // Initialization code. Don't use any Avalonia, third-party APIs or any
-        // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
-        // yet and stuff might break.
         public static void Main(string[] args) 
         {
             SetupLogging();
@@ -22,11 +21,32 @@ namespace Gevlee.Deview.Application
                 .StartWithClassicDesktopLifetime(args);
         }
 
-        // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
         {
-            return AppBuilder.Configure<App>()
-                .UsePlatformDetect()
+            var result = AppBuilder.Configure<App>();
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                result
+                    .UseWin32()
+                    .UseSkia();
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                result.UsePlatformDetect();
+                    //.UseManagedSystemDialogs<AppBuilder, WasabiWindow>();
+            }
+            else
+            {
+                result.UsePlatformDetect();
+            }
+
+
+            return result
+                .With(new Win32PlatformOptions { AllowEglInitialization = true, UseDeferredRendering = true })
+                .With(new X11PlatformOptions { UseGpu = true, WmClass = "Deview" })
+                .With(new AvaloniaNativePlatformOptions { UseDeferredRendering = true, UseGpu = true })
+                .With(new MacOSPlatformOptions { ShowInDock = true })
                 .UseReactiveUI();
         }
 
@@ -35,7 +55,10 @@ namespace Gevlee.Deview.Application
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .MinimumLevel.Debug()
+                .WriteTo.Console()
+#if DEBUG
                 .WriteTo.Debug()
+#endif
                 .CreateLogger();
 
             SerilogLogger.Initialize(Log.Logger);

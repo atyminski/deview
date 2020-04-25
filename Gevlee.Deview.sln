@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gevlee.Deview.Application", "src\Gevlee.Deview.Application\Gevlee.Deview.Application.csproj", "{E91405D2-668B-420C-A35A-246DA1168A5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gevlee.Deview.Application", "src\Gevlee.Deview.Application\Gevlee.Deview.Application.csproj", "{E91405D2-668B-420C-A35A-246DA1168A5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gevlee.Deview.UI", "src\Gevlee.Deview.UI\Gevlee.Deview.UI.csproj", "{0712623A-3DB2-4C31-BD2E-3A01BEC26115}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{E91405D2-668B-420C-A35A-246DA1168A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E91405D2-668B-420C-A35A-246DA1168A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E91405D2-668B-420C-A35A-246DA1168A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0712623A-3DB2-4C31-BD2E-3A01BEC26115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0712623A-3DB2-4C31-BD2E-3A01BEC26115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0712623A-3DB2-4C31-BD2E-3A01BEC26115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0712623A-3DB2-4C31-BD2E-3A01BEC26115}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{7FFDC59C-A983-484A-842D-DF19596945D1} = {BA1DA107-F9CC-4D18-BD3C-404BD82A5417}
 		{CD447011-B320-4E88-BC65-23E39ED0B767} = {C9F571DC-AEFB-4212-8680-CB99F68DC422}
 		{E91405D2-668B-420C-A35A-246DA1168A5A} = {BA1DA107-F9CC-4D18-BD3C-404BD82A5417}
+		{0712623A-3DB2-4C31-BD2E-3A01BEC26115} = {BA1DA107-F9CC-4D18-BD3C-404BD82A5417}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65284F2B-14BC-4C73-BF75-137D9C17EA8C}

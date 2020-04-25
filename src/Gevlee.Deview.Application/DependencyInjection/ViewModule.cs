@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Gevlee.Deview.UI;
 using System.Linq;
 
 namespace Gevlee.Deview.Application.DependencyInjection
@@ -7,7 +8,8 @@ namespace Gevlee.Deview.Application.DependencyInjection
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(GetType().Assembly).Where(t => t.Namespace.Equals("Gevlee.Deview.Application.Views"));
+            builder.RegisterType<MainWindow>();
+            builder.RegisterAssemblyTypes(typeof(IShell).Assembly).Where(t => t.Namespace.Equals("Gevlee.Deview.UI.Views"));
         }
     }
 }

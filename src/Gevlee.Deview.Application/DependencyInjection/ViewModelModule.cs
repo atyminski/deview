@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Gevlee.Deview.Core.ViewModels;
 
 namespace Gevlee.Deview.Application.DependencyInjection
 {
@@ -6,7 +7,7 @@ namespace Gevlee.Deview.Application.DependencyInjection
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(GetType().Assembly)
+            builder.RegisterAssemblyTypes(typeof(ViewModelBase).Assembly)
                 .Where(t => t.Name.EndsWith("ViewModel"));
         }
     }
