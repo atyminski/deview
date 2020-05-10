@@ -11,12 +11,16 @@
 		</AvaloniaResource>
 		<AvaloniaResource Include="Assets\**" />
 	</ItemGroup>
+	<!--<ItemGroup>
+		<EmbeddedResource Include="**\*.xshd;**\*.resx;**\*.xaml;Assets\*;**\*.paml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+	</ItemGroup>-->
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="0.9.9" />
 		<PackageReference Include="Avalonia.Desktop" Version="0.9.9" />
 		<PackageReference Include="Avalonia.ReactiveUI" Version="0.9.9" />
 		<PackageReference Include="ReactiveUI" Version="11.3.8" />
 		<PackageReference Include="Splat" Version="9.4.5" />
+		<PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Gevlee.Deview.Core\Gevlee.Deview.Core.csproj" />

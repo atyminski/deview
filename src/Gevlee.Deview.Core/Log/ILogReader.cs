@@ -9,8 +9,8 @@ namespace Gevlee.Deview.Core.Log
 
         string NewLineSeparator { get; set; }
 
-        long Offset { get; set; }
+        long Position { get; set; }
 
-        IAsyncEnumerable<string> ReadNextEntriesAsync();
+        IAsyncEnumerable<ILogEntry> ReadNextEntriesAsync();
     }
 }

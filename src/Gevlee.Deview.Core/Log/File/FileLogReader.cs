@@ -20,19 +20,19 @@ namespace Gevlee.Deview.Core.Log.File
 
         public string NewLineSeparator { get; set; } = System.Environment.NewLine;
 
-        public long Offset { get; set; }
+        public long Position { get; set; }
 
-        public async IAsyncEnumerable<string> ReadNextEntriesAsync()
+        public async IAsyncEnumerable<ILogEntry> ReadNextEntriesAsync()
         {
             using (var fileStream = _fileStreamProvider.GetStream(Path))
             using (var streamReader = new StreamReader(fileStream, Encoding, true))
             {
-                if (Offset > fileStream.Length)
+                if (Position > fileStream.Length)
                 {
-                    Offset = 0;
+                    Position = 0;
                 }
 
-                fileStream.Position = Offset;
+                fileStream.Position = Position;
 
                 while (!streamReader.EndOfStream)
                 {
@@ -41,12 +41,15 @@ namespace Gevlee.Deview.Core.Log.File
                     while (!streamReader.EndOfStream && !NewLineSeparatorReached(entryChars))
                     {
                         var buffer = new char[1];
-                        Offset = await streamReader.ReadAsync(buffer, 0, 1);
+                        Position = await streamReader.ReadAsync(buffer, 0, 1);
 
                         entryChars.AddRange(buffer);
                     }
 
-                    yield return new string(entryChars.ToArray()).TrimEnd(NewLineSeparator.ToCharArray());
+                    yield return new LogEntry
+                    {
+                        Content = new string(entryChars.ToArray()).TrimEnd(NewLineSeparator.ToCharArray())
+                    };
                 }
             }
         }
