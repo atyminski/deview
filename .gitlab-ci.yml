@@ -3,7 +3,7 @@ stages:
 
 build_job:
   stage: build
-  image: mcr.microsoft.com/dotnet/core/sdk:3.1
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1-bionic
   script:
     - './build.sh compile'
   artifacts:
