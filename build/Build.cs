@@ -19,10 +19,10 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Parameter("publish-framework")]
-    public string PublishFramework { get; set; }
+    [Parameter("Framework for build and publish")]
+    public string TargetFramework { get; set; } = "netcoreapp3.1";
 
-    [Parameter("publish-runtime")]
+    [Parameter("Publish runetime")]
     public string PublishRuntime { get; set; }
 
     [Solution] readonly Solution Solution;
@@ -56,6 +56,7 @@ class Build : NukeBuild
         {
             DotNetBuild(s => s
                 .SetProjectFile(Solution)
+                .SetFramework(TargetFramework)
                 .SetConfiguration(Configuration)
                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
@@ -79,18 +80,18 @@ class Build : NukeBuild
     Target Publish => _ => _
         .DependsOn(Compile)
         .Requires(() => PublishRuntime)
-        .Requires(() => PublishFramework)
+        .Requires(() => TargetFramework)
         .Executes(() =>
         {
             DotNetPublish(s => s
                 .SetProject(Solution.GetProject(ApplicationProject))
                 .SetConfiguration(Configuration)
-                .SetFramework(PublishFramework)
+                .SetFramework(TargetFramework)
                 .SetRuntime(PublishRuntime)
                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
                 .SetInformationalVersion(GitVersion.InformationalVersion)
-                .SetOutput(ArtifactsDirectory / PublishFramework + "-" + PublishRuntime));
+                .SetOutput(ArtifactsDirectory / TargetFramework + "-" + PublishRuntime));
         });
 
 }
