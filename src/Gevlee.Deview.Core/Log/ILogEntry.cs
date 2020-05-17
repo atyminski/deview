@@ -4,6 +4,8 @@
     {
         public string Content { get; }
 
-        public Range PositionRange { get; }
+        public int PositionNumber { get; set; }
+
+        public Range ContentRange { get; }
     }
 }

@@ -34,6 +34,8 @@ namespace Gevlee.Deview.Core.Log.File
 
                 fileStream.Position = Position;
 
+                int logEntryPosition = 1;
+
                 while (!streamReader.EndOfStream)
                 {
                     var entryChars = new List<char>();
@@ -48,8 +50,11 @@ namespace Gevlee.Deview.Core.Log.File
 
                     yield return new LogEntry
                     {
-                        Content = new string(entryChars.ToArray()).TrimEnd(NewLineSeparator.ToCharArray())
+                        Content = new string(entryChars.ToArray()).TrimEnd(NewLineSeparator.ToCharArray()),
+                        PositionNumber = logEntryPosition,
                     };
+
+                    logEntryPosition++;
                 }
             }
         }

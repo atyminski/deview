@@ -2,16 +2,31 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:ae="clr-namespace:AvaloniaEdit;assembly=Gevlee.Deview.UI"
+       xmlns:converters="clr-namespace:Gevlee.Deview.UI.Converters;assembly=Gevlee.Deview.UI"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="Gevlee.Deview.UI.Views.LogView">
-  <ScrollViewer>
-	<ItemsControl Items="{Binding LogLines}">
-	  <ItemsControl.ItemTemplate>
-		<DataTemplate>
-		  <TextBox Text="{Binding}"/>
-		</DataTemplate>
-	  </ItemsControl.ItemTemplate>
-	</ItemsControl>
+  <UserControl.Resources>
+    <converters:BoolToBrushConverter x:Key="boolToGreenColorConverter" Brush="#ededed" />
+  </UserControl.Resources>
+  <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <ItemsControl Items="{Binding Entries}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <Grid ColumnDefinitions="30, *" Background="{Binding IsEven, Converter={StaticResource boolToGreenColorConverter}}">
+            <TextBlock
+              Grid.Column="0"
+              Text="{Binding PositionNumber}"
+              Foreground="#8f8d8d"
+            />
+            <TextBlock
+              Grid.Column="1"
+              Text="{Binding Content}"
+              Background="Transparent"
+              TextWrapping="Wrap"
+            />
+          </Grid>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
   </ScrollViewer>
 </UserControl>

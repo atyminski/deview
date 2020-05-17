@@ -10,6 +10,8 @@
         Title="Deview">
   <Grid RowDefinitions="20,*">
     <ContentControl DockPanel.Dock="Top" Content="{Binding MainMenuModel}"/>
-    <ContentControl Grid.Row="1" Content="{Binding OpenedLogsContainerModel}"/>
+    <DockPanel Grid.Row="1">
+      <ContentControl DockPanel.Dock="Right" Content="{Binding OpenedLogsContainerModel}"/>
+    </DockPanel>
   </Grid>
 </Window>

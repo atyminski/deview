@@ -10,26 +10,35 @@ using System.Text;
 
 namespace Gevlee.Deview.Core.ViewModels
 {
-    public class LogViewModel : ViewModelBase, ILog
+    public class LogViewModel : ViewModelBase
     {
-        private ObservableCollection<ILogEntry> _entries;
+        private ObservableCollection<LogEntryViewModel> _entries = new ObservableCollection<LogEntryViewModel>();
         private ILogReader logReader;
 
         public LogViewModel(ILogReader logReader)
         {
-            _entries = new ObservableCollection<ILogEntry>();
             this.logReader = logReader;
             this.WhenActivated((disposables) => 
             {
                 this.logReader.ReadNextEntriesAsync()
                 .ToObservable()
-                .Subscribe(_entries.Add)
+                .Subscribe(AddEntry)
                 .DisposeWith(disposables);
             });
         }
 
+        private void AddEntry(ILogEntry entry)
+        {
+            _entries.Add(CreateViewModelForEntry(entry));
+        }
+
+        private LogEntryViewModel CreateViewModelForEntry(ILogEntry entry)
+        {
+            return new LogEntryViewModel(entry);
+        }
+
         public Encoding Encoding { get; set; }
 
-        IEnumerable<ILogEntry> ILog.Entries => _entries;
+        public IEnumerable<LogEntryViewModel> Entries => _entries;
     }
 }
