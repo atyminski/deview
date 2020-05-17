@@ -23,7 +23,7 @@ class Build : NukeBuild
     public string TargetFramework { get; set; } = "netcoreapp3.1";
 
     [Parameter("Publish runetime")]
-    public string PublishRuntime { get; set; }
+    public string PublishRuntime { get; set; } = "win-x64";
 
     [Solution] readonly Solution Solution;
     [GitRepository] readonly GitRepository GitRepository;
