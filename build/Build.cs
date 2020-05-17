@@ -1,15 +1,11 @@
-using System;
-using System.Linq;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Utilities.Collections;
-using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -18,16 +14,16 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
 {
-    /// Support plugins are available for:
-    ///   - JetBrains ReSharper        https://nuke.build/resharper
-    ///   - JetBrains Rider            https://nuke.build/rider
-    ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
-    ///   - Microsoft VSCode           https://nuke.build/vscode
-
     public static int Main () => Execute<Build>(x => x.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+
+    [Parameter("publish-framework")]
+    public string PublishFramework { get; set; }
+
+    [Parameter("publish-runtime")]
+    public string PublishRuntime { get; set; }
 
     [Solution] readonly Solution Solution;
     [GitRepository] readonly GitRepository GitRepository;
@@ -36,6 +32,7 @@ class Build : NukeBuild
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
+    string ApplicationProject => "Gevlee.Deview.Application";
 
     Target Clean => _ => _
         .Before(Restore)
@@ -64,6 +61,36 @@ class Build : NukeBuild
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
                 .SetInformationalVersion(GitVersion.InformationalVersion)
                 .EnableNoRestore());
+        });
+
+    Target Test => _ => _
+    .DependsOn(Compile)
+    .Executes(() =>
+    {
+        DotNetTest(s => s
+            .SetProjectFile(Solution)
+            .SetConfiguration(Configuration)
+            .SetLogger("trx")
+            .SetResultsDirectory(ArtifactsDirectory / "TestResults")
+            .EnableNoBuild()
+            .EnableNoRestore());
+    });
+
+    Target Publish => _ => _
+        .DependsOn(Compile)
+        .Requires(() => PublishRuntime)
+        .Requires(() => PublishFramework)
+        .Executes(() =>
+        {
+            DotNetPublish(s => s
+                .SetProject(Solution.GetProject(ApplicationProject))
+                .SetConfiguration(Configuration)
+                .SetFramework(PublishFramework)
+                .SetRuntime(PublishRuntime)
+                .SetAssemblyVersion(GitVersion.AssemblySemVer)
+                .SetFileVersion(GitVersion.AssemblySemFileVer)
+                .SetInformationalVersion(GitVersion.InformationalVersion)
+                .SetOutput(ArtifactsDirectory / PublishFramework + "-" + PublishRuntime));
         });
 
 }
