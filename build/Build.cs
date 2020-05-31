@@ -19,10 +19,10 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Parameter("Framework for build and publish")]
+    [Parameter("Publish framework")]
     public string TargetFramework { get; set; } = "netcoreapp3.1";
 
-    [Parameter("Publish runetime")]
+    [Parameter("Publish runtime")]
     public string PublishRuntime { get; set; } = "win-x64";
 
     [Solution] readonly Solution Solution;
@@ -56,7 +56,6 @@ class Build : NukeBuild
         {
             DotNetBuild(s => s
                 .SetProjectFile(Solution)
-                .SetFramework(TargetFramework)
                 .SetConfiguration(Configuration)
                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
